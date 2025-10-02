@@ -38,20 +38,39 @@ const Auth = () => {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!signupData.name || !signupData.email || !signupData.password) {
-      toast.error('Please fill in all fields');
+    
+    // Validation
+    if (!signupData.name.trim()) {
+      toast.error('Please enter your full name');
+      return;
+    }
+    
+    if (!signupData.email.trim()) {
+      toast.error('Please enter your email');
+      return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(signupData.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    
+    if (!signupData.password) {
+      toast.error('Please enter a password');
       return;
     }
 
     if (signupData.password.length < 6) {
-      toast.error('Password must be at least 6 characters');
+      toast.error('Password must be at least 6 characters long');
       return;
     }
 
     setIsLoading(true);
     try {
       await signup(signupData.email, signupData.password, signupData.name);
-      toast.success('Account created successfully!');
+      toast.success('Account created successfully! Welcome to Jaivam Jeevan! 🌱');
       navigate('/farm-selection');
     } catch (error) {
       toast.error('Signup failed. Please try again.');
@@ -122,10 +141,11 @@ const Auth = () => {
                     <Input
                       id="signup-name"
                       type="text"
-                      placeholder="John Doe"
+                      placeholder="Enter your full name"
                       value={signupData.name}
                       onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
                       disabled={isLoading}
+                      required
                     />
                   </div>
                   <div className="space-y-2">
@@ -140,7 +160,7 @@ const Auth = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">Password</Label>
+                    <Label htmlFor="signup-password">Password (min 6 characters)</Label>
                     <Input
                       id="signup-password"
                       type="password"
@@ -148,6 +168,8 @@ const Auth = () => {
                       value={signupData.password}
                       onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
                       disabled={isLoading}
+                      required
+                      minLength={6}
                     />
                   </div>
                   <Button type="submit" className="w-full" disabled={isLoading}>

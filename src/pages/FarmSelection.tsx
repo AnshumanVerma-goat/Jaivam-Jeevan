@@ -21,10 +21,10 @@ const FarmSelection = () => {
     soilType: '',
   });
 
-  // Mock existing farms
+  // Mock existing farms in Kerala
   const existingFarms = [
-    { id: '1', name: 'Green Valley Farm', location: 'Maharashtra', size: 5, cropType: 'Rice' },
-    { id: '2', name: 'Sunrise Acres', location: 'Punjab', size: 10, cropType: 'Wheat' },
+    { id: '1', name: 'Backwater Farm', location: 'Alappuzha', size: 3, cropType: 'Rice' },
+    { id: '2', name: 'Hill View Plantation', location: 'Wayanad', size: 5, cropType: 'Coffee' },
   ];
 
   const handleSelectFarm = (farmId: string) => {
@@ -120,18 +120,26 @@ const FarmSelection = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="location">Location (State)</Label>
+                  <Label htmlFor="location">Location (District in Kerala)</Label>
                   <Select value={formData.location} onValueChange={(value) => setFormData({ ...formData, location: value })}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select state" />
+                      <SelectValue placeholder="Select district" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="maharashtra">Maharashtra</SelectItem>
-                      <SelectItem value="punjab">Punjab</SelectItem>
-                      <SelectItem value="haryana">Haryana</SelectItem>
-                      <SelectItem value="uttar-pradesh">Uttar Pradesh</SelectItem>
-                      <SelectItem value="karnataka">Karnataka</SelectItem>
-                      <SelectItem value="tamil-nadu">Tamil Nadu</SelectItem>
+                      <SelectItem value="thiruvananthapuram">Thiruvananthapuram</SelectItem>
+                      <SelectItem value="kollam">Kollam</SelectItem>
+                      <SelectItem value="alappuzha">Alappuzha</SelectItem>
+                      <SelectItem value="pathanamthitta">Pathanamthitta</SelectItem>
+                      <SelectItem value="kottayam">Kottayam</SelectItem>
+                      <SelectItem value="idukki">Idukki</SelectItem>
+                      <SelectItem value="ernakulam">Ernakulam</SelectItem>
+                      <SelectItem value="thrissur">Thrissur</SelectItem>
+                      <SelectItem value="palakkad">Palakkad</SelectItem>
+                      <SelectItem value="malappuram">Malappuram</SelectItem>
+                      <SelectItem value="kozhikode">Kozhikode</SelectItem>
+                      <SelectItem value="wayanad">Wayanad</SelectItem>
+                      <SelectItem value="kannur">Kannur</SelectItem>
+                      <SelectItem value="kasaragod">Kasaragod</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -154,12 +162,16 @@ const FarmSelection = () => {
                       <SelectValue placeholder="Select crop" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="rice">Rice</SelectItem>
-                      <SelectItem value="wheat">Wheat</SelectItem>
-                      <SelectItem value="cotton">Cotton</SelectItem>
-                      <SelectItem value="sugarcane">Sugarcane</SelectItem>
+                      <SelectItem value="rice">Rice (Paddy)</SelectItem>
+                      <SelectItem value="coconut">Coconut</SelectItem>
+                      <SelectItem value="rubber">Rubber</SelectItem>
+                      <SelectItem value="pepper">Pepper</SelectItem>
+                      <SelectItem value="cardamom">Cardamom</SelectItem>
+                      <SelectItem value="tapioca">Tapioca</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="coffee">Coffee</SelectItem>
+                      <SelectItem value="tea">Tea</SelectItem>
                       <SelectItem value="vegetables">Vegetables</SelectItem>
-                      <SelectItem value="fruits">Fruits</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

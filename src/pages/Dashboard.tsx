@@ -8,14 +8,18 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Trophy, Target, Award, TrendingUp, Droplets, Bug, Leaf, 
-  Sparkles, LogOut, Menu, User, MessageCircle, ChevronRight,
-  Calendar, Flame
+  Sparkles, LogOut, Menu, User, ChevronRight,
+  Calendar, Flame, Gamepad2, Languages
 } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useLanguage } from '@/contexts/LanguageContext';
+import Chatbot from '@/components/Chatbot';
+import FarmingGames from '@/components/FarmingGames';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { language, setLanguage, t } = useLanguage();
   const [activeQuests, setActiveQuests] = useState([
     {
       id: '1',
@@ -111,6 +115,27 @@ const Dashboard = () => {
                 <SheetTitle>Menu</SheetTitle>
               </SheetHeader>
               <div className="mt-6 space-y-4">
+                <div className="px-2 mb-4">
+                  <p className="text-sm font-medium mb-2">Language / ഭാഷ</p>
+                  <div className="flex gap-2">
+                    <Button
+                      variant={language === 'en' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setLanguage('en')}
+                      className="flex-1"
+                    >
+                      English
+                    </Button>
+                    <Button
+                      variant={language === 'ml' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setLanguage('ml')}
+                      className="flex-1"
+                    >
+                      മലയാളം
+                    </Button>
+                  </div>
+                </div>
                 <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/dashboard')}>
                   <User className="w-4 h-4 mr-2" />
                   Profile
@@ -121,7 +146,7 @@ const Dashboard = () => {
                 </Button>
                 <Button variant="ghost" className="w-full justify-start text-destructive" onClick={handleLogout}>
                   <LogOut className="w-4 h-4 mr-2" />
-                  Logout
+                  {t('logout')}
                 </Button>
               </div>
             </SheetContent>
@@ -209,9 +234,10 @@ const Dashboard = () => {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="quests" className="animate-slide-up">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="quests">Active Quests</TabsTrigger>
-            <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="quests">{t('quests')}</TabsTrigger>
+            <TabsTrigger value="games">{t('games')}</TabsTrigger>
+            <TabsTrigger value="leaderboard">{t('leaderboard')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="quests" className="space-y-4 mt-4">
@@ -264,6 +290,10 @@ const Dashboard = () => {
             })}
           </TabsContent>
 
+          <TabsContent value="games" className="mt-4">
+            <FarmingGames />
+          </TabsContent>
+
           <TabsContent value="leaderboard" className="mt-4">
             <Card>
               <CardHeader>
@@ -309,13 +339,8 @@ const Dashboard = () => {
         </Tabs>
       </main>
 
-      {/* AI Assistant FAB */}
-      <Button
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-2xl animate-pulse-glow"
-        size="icon"
-      >
-        <MessageCircle className="w-6 h-6" />
-      </Button>
+      {/* AI Assistant Chatbot */}
+      <Chatbot />
     </div>
   );
 };

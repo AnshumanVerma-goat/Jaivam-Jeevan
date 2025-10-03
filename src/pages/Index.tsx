@@ -176,7 +176,7 @@ const Index = () => {
       <footer className="py-8 px-4 border-t">
         <div className="max-w-6xl mx-auto text-center text-sm text-muted-foreground">
           <p>Jaivam Jeevan - Empowering Sustainable Agriculture</p>
-          <p className="mt-2">Smart India Hackathon 2025 | Team Code Blooded</p>
+          <p className="mt-2">Smart India Hackathon 2025 | Team CloudX Chasers</p>
         </div>
       </footer>
     </div>
